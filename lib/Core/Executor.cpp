@@ -1893,7 +1893,11 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
 
   case Instruction::Shl: {
     Cell left = eval(ki, 0, state);
+    llvm::errs() << "SHL LEFT ARG: ";
+    left.dump();
     Cell right = eval(ki, 1, state);
+    llvm::errs() << "SHL RIGHT ARG: ";
+    right.dump();
     ref<Expr> result = ShlExpr::create(left.value, right.value);
     bindLocal(ki, state, result, left.taint | right.taint);
     break;
@@ -1901,7 +1905,11 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
 
   case Instruction::LShr: {
     Cell left = eval(ki, 0, state);
+    llvm::errs() << "LSHR LEFT ARG: ";
+    left.dump();
     Cell right = eval(ki, 1, state);
+    llvm::errs() << "LSHR RIGHT ARG: ";
+    right.dump();
     ref<Expr> result = LShrExpr::create(left.value, right.value);
     bindLocal(ki, state, result,
                          left.taint | right.taint);
@@ -1910,7 +1918,11 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
 
   case Instruction::AShr: {
     Cell left = eval(ki, 0, state);
+    llvm::errs() << "ASHR LEFT ARG: ";
+    left.dump();
     Cell right = eval(ki, 1, state);
+    llvm::errs() << "ASHR RIGHT ARG: ";
+    right.dump();
     ref<Expr> result = AShrExpr::create(left.value, right.value);
     bindLocal(ki, state, result,
                          left.taint | right.taint);

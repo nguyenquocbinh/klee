@@ -13,12 +13,23 @@
 #include <klee/Expr.h>
 #include <klee/Taint.h>
 
+#include "llvm/Support/raw_ostream.h"
+
 namespace klee {
   class MemoryObject;
 
   struct Cell {
     ref<Expr> value;
     TaintSet taint;
+
+    void print(llvm::raw_ostream &stream) const {
+    	value->print(stream);
+    	stream << " with taint set = " << taint << "\n";
+    }
+
+    void dump() const {
+    	print(llvm::errs());
+    }
   };
 }
 
